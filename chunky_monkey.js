@@ -21,3 +21,23 @@ function chunkArrayInGroups(arr, size) {
 }
 
 chunkArrayInGroups(["a", "b", "c", "d"], 2);
+
+
+
+// Simpler version
+
+function chunkArrayInGroups(arr, size) {
+  // create empty array to push into
+  var tempArray = [];
+  // create a counter that will stop the loop when larger than the size of the array
+  count = 0;
+  
+  while(count < arr.length) {
+    //push groups of two into the array
+    tempArray.push(arr.slice(count, count + size));
+    count += size;               
+  }
+  return tempArray;
+}
+
+chunkArrayInGroups(["a", "b", "c", "d"], 2);
