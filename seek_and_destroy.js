@@ -31,7 +31,7 @@ destroyer([1, 2, 3, 1, 2, 3], 2, 3);
 
 
 
-//more complicated approach
+//more condensed version
 
 
 function destroyer(arr) {
