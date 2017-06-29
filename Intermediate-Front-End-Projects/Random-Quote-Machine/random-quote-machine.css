@@ -15,14 +15,18 @@ p {
   font-style: italic;
 }
 
+.tag {
+  font-size: 25px;
+}
+
 .quotes {
-  background-color: #de2121;
+  background-color: red;
   width: 33%;
   height: auto;
   color: white;
   margin: 25px auto;
-  border: 2px;
-  border-color: green;
+  border: 1px;
+  border-color: white;
   border-style: solid;
   border-radius: 10px;
   padding: 30px;
