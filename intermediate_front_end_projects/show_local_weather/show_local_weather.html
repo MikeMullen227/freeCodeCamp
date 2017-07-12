@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <title>Show The Local Weather</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="show_local_weather.css">
+</head>    
 <body>
-
-    <p id="data"></p>
-      <ul>
-        <li id="fahr"></li>
-        <li id="cel"></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<div class="text-center bg">
+  <h1>freeCodeCamp Zipline</h1>
+  <h2>Show The Local Weather</h2>
+  <ul class="list-unstyled">
+    <li class="btn btn-default btn-transparent fahrenheit" id="temp"></li>
+    <li class="btn btn-default" id="city"></li>
+    <li class="btn btn-default" id="condition"></li>
+    <li class="btn btn-default" id="wind"></li>
+  </ul>
+</div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="show_local_weather.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="show_local_weather.js"></script>    
 </body>
-
 </html>
 
