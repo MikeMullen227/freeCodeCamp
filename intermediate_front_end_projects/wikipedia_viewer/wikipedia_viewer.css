@@ -1,3 +1,21 @@
+body {
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Carte_des_barri%C3%A8res_de_s%C3%A9paration.svg/863px-Carte_des_barri%C3%A8res_de_s%C3%A9paration.svg.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+h1, h3 {
+  font-family: 'Saira Semi Condensed', sans-serif, Times New Roman;
+  margin: 18px;
+}
+
 #results {
   text-align: initial;
+  list-style: none;
+  margin-top: 60px;
+}
+
+.col-5 {
+  margin: 25px auto;
 }

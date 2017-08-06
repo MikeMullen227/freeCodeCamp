@@ -6,6 +6,7 @@ $(document).ready(function() {
     // concatenate the search term entered by user to the wiki url
     var url = "https://en.wikipedia.org/w/api.php?action=opensearch&search=" + searchTerm + "&format=json&callback=?";
     
+    // make ajax request to wiki api to get search results
     $.ajax({
         type: "GET",
         url: url,
@@ -13,13 +14,13 @@ $(document).ready(function() {
         dataType: "json",
         success: function(data) {
           
+        // clear results before each search  
         $("#results").empty();
+          // loop through json array to add results to ul
           for(var i = 0; i < data[1].length; i++) {
-              $("#results").prepend("<li><a href= " + data[3][i] + ">" + data[1][i] + "</a>" + "<p>" + data[2][i] + "</p></li>"); 
+              $("#results").prepend("<li><a target='_blank' href= " + data[3][i] + ">" + data[1][i] + "</a>" + "<p>" + data[2][i] + "</p></li>"); 
           }
-          //get heading console.log(data[1][0]);
-          //get description console.log(data[2][0]);
-          //get link console.log(data[3][0]);
+         
         },
         error: function() {
           console.log("error");
