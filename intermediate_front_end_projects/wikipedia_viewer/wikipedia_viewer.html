@@ -3,12 +3,17 @@
 <head>
   <title>Wikipedia Viewer</title>  
 </head>
-    <div class="container">
-      <h1>Wikipedia Viewer</h1>
-      <a class="btn btn-primary" href="https://en.wikipedia.org/wiki/Special:Random" target="blank">Random Article</a>
-      <form action="">
-        <input type="text" class="form-control" placeholder="Search">
-        <input type="submit" value="Submit">
-      </form>  
-    </div>
+   <div class="container text-center">
+  <h1>Wikipedia Viewer</h1>
+  <h3>freeCodeCamp Zipline</h3>
+  <a class="btn btn-primary" href="https://en.wikipedia.org/wiki/Special:Random" target="blank">Random Topic</a>
+  <div class="row"> 
+    <div class="col-6 offset-3" >
+       <input type="text" class="form-control " id="search" placeholder="Search for an article">
+    </div>  
+  </div>
+  <button class="btn btn-primary" id="submit" type="submit" value="Submit">Submit</button>
+  <ul id="results">
+  </ul> 
+</div>
 </html>
