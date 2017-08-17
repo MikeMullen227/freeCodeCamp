@@ -1,0 +1,52 @@
+body {
+font-family: 'Roboto', sans-serif;
+}
+
+/* --- navigation --- */
+
+.nav {
+  font-size: 1.3em; 
+}
+
+.navbar-header {
+  padding-left: 30px;
+}
+.navbar-right {
+  padding-right: 50px;
+}
+
+/* --- about --- */
+
+.about {
+ background-image: url("http://www.desicomments.com/wp-content/uploads/2017/04/Beautiful-Photo-Of-Stars.jpg");
+  background-size: cover;  
+  height: 800px;
+}
+
+
+.headshot {
+  border-radius: 50%;
+  width: 250px;
+  height: 250px;
+  display: block;
+  margin: 150px auto 0;
+}
+
+.name {
+  font-size: 4.0em;
+  color: white;
+}
+
+.title {
+  font-size: 2.0em;
+  color: white;
+}
+
+.summary {
+  font-size: 1.8em;
+}
+.btn-default {
+  font-size: 1.6em;
+  margin: 5px;
+}
+
