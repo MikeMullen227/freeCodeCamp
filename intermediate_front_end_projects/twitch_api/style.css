@@ -1,0 +1,13 @@
+body {
+  background: url('http://www.guoguiyan.com/data/out/203/70128082-twitch-wallpapers.jpeg') no-repeat center center fixed;
+  background-position: ;
+  background-size: cover ;
+  color: white;
+}
+
+#header {
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 20px;
+  padding: 10px;
+  border-radius: 10px
+}
