@@ -3,11 +3,52 @@ body {
   background-position: ;
   background-size: cover ;
   color: white;
+  font-family: "Lato";
+  font-size: 25px; 
 }
 
 #header {
   background-color: rgba(0, 0, 0, 0.5);
-  margin: 20px;
+  margin: 30px 0;
   padding: 10px;
-  border-radius: 10px
+  border: 4px white solid;
+  border-radius: 30px;
+  width: 
+}
+
+h1 {
+  font-size: 50px;
+}
+
+img {
+  width: 75px;
+  border-radius: 50%;
+  
+}
+
+.row {
+  border: white solid;
+  border-width: 2px 2px 0px 2px;
+  padding: 10px;
+  
+  background-color: rgba(0, 0, 0, 0.5);
+  
+  
+}
+
+#row1 {
+  border-radius: 10px 10px 0 0;
+}
+
+.row:last-child {
+   border: 2px solid white;
+   border-radius: 0 0 10px 10px;
+   margin-bottom: 30px;
+}
+.col-md-4 {
+  padding: 10px;
+}
+
+a {
+  color: white;
 }
