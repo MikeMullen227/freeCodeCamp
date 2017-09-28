@@ -38,7 +38,7 @@ $(document).ready(function() {
         screen = '';
         screenCurrent = '';
     } else if(input == 'ce') {
-         clearEntry();       
+        clearEntry();       
     } else if(input == 'ac') {
         allClear();
     } else if(input == '=') {
