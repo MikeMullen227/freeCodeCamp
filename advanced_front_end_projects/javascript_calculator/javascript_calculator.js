@@ -1,14 +1,9 @@
 $(document).ready(function() {
   var input = '';
-  var screen = ''
-  var ceHistory = ''; 
+  var screen = '' 
   var entries = [];
   var currentEntry = ''
   var previousOperator = '';
-  var calculated;
-  var previousInput;
-  var operators = ['+', '-', '/', '*'];
-  var nums = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   
   function allClear() {
     entries.length = 0;
@@ -19,91 +14,77 @@ $(document).ready(function() {
     previousOperator = ''
   }
   
-function containsOperator(needle, haystack){ 
-  for(var i = 0 , len = needle.length; i < len; i++){
-     if($.inArray(needle[i], haystack) !== -1)
-       return true;
-  }
-  return false;
-}
-
- // true
-
   function calculate() {
+        entries.push(currentEntry)
         var total = eval(entries.join('').replace('=', ''));
         $('#display').html(total);
         entries = [];
         entries.push(total);
         console.log(total)
         currentEntry = '';
-        previousOperator = '';
+        screen = '';
     }
     
    function clearEntry() {
     screen = '0'
     $('#display').html(screen);
-    screen = ''
-    entries.pop();     
+    screen = '';
+    currentEntry ='';
   }
   
   function digitDisplay() {
     screen += input;
     currentEntry += input;
-    $('#display').html(screen);
-      
+    $('#display').html(screen);   
   }
   
   function operation() {
-    var lastIndex = entries.length - 1
-        
         entries.push(currentEntry)
         currentEntry = input;
         entries.push(input);
         previousOperator = input;
         $('#display').html(screen);
         screen = '';
-        currentEntry = '';
-       
-      
-         
+        currentEntry = '';   
   }
   
    function display() {
-     var lastArrayEntry = entries.length - 1
-    if((input == '+' || input == '-' || input == '*' || input == '/') && 
-       (currentEntry != '')) {
+    var operatorTest = input == '+' || input == '-' || input == '*' || input == '/';
+    var digitTest = input == '0' || input == '2' || input == '3' || input == '4' || input == '5' || input == '6' || input == '7' || input == '8' || input == '9'
+    if((digitTest) && (typeof entries[0] === 'number')) {
+          allClear()
+          currentEntry += input;
+          screen += input;
+          $('#display').html(screen);
+    } else if((operatorTest) && (currentEntry != '')) {
         operation();
-      
-    } else if((input == '+' || input == '-' || input == '*' || input == '/') && (input != previousOperator) && (entries.length > 0)) {
+    } else if((operatorTest) && (typeof entries[0] === 'number')) {
+          var entryToString = entries.map(String);
+          entries = entryToString
+          entries.push(input)
+    } else if((operatorTest) && (input != previousOperator) && (previousOperator != '')) {
           entries.pop();
           entries.push(input)
           previousOperator = input;
-    } else if(input == 'ce') {
+    } else if(input == 'ce')  {
         clearEntry();       
     } else if(input == 'ac') {
         allClear();
     } else if(input == '=') {
         calculate();   
-    } else if(input == '0' || input == '2' || input == '3' || input == '4' || input == '5' || input == '6' || input == '7' || input == '8' || input == '9') {
+    } else if(digitTest) {
         digitDisplay();
     }
   }
    
-  
   // A function that takes the value from the button that was clicked, concatenates it to the string screen, and then displays it on the screen
- 
-  
+
 $('button').click(function(event) {
      input = $(event.target).val();
      display();
-     
-     //console.log(tempEntries)
-     //console.log(entries);
-  
      console.log(entries)
      console.log(currentEntry)
      console.log(screen)
      console.log(previousOperator)
-  });
-  
+  });  
 });
