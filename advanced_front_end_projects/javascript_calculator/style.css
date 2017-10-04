@@ -1,14 +1,16 @@
 h3 {
   padding: 15px;
+  color: white;
 }
 
 .calculator {
   width: 285px;
   height: 455px;
   margin: 50px auto;
-  background-color: #e7efd2;
+  background-color: rgba(42, 86, 118, 0.68);
   border: 2px solid black;
   border-radius: 30px;
+  box-shadow: 10px 10px 5px #888888;
 }
 
 #display {
@@ -43,11 +45,20 @@ h3 {
 }
 
 #zero {
-  width: 113px
+  width: 111px;
+  margin-left: 5px;
 }
 
 #equal {
   height: 108px;
   margin-top: -54px;
   margin-left: 5px;
+}
+
+#signature {
+  
+}
+
+h4 {
+  
 }
