@@ -1,0 +1,47 @@
+h1 {
+  margin-top: 40px;
+  font-size: 4.5em;
+}
+
+h2 {
+  font-size: 3.5em;
+}
+
+h3 {
+  font-size: 4.5em;
+}
+.time-section {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.time {
+  display: flex;
+  margin-top: 5px;
+}
+
+.sessionAdjust {
+  margin: 0 20px;
+}
+
+.breakAdjust {
+  margin: 0 20px;
+}
+
+p {
+  margin-bottom: 5px;
+}
+
+.button-group {
+  margin: 20px;
+}
+
+.btn-lg {
+  margin: 3px;
+}
+
+.btn-secondary {
+  padding: 2px 6px;
+  
+}
