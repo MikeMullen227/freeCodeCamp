@@ -4,28 +4,41 @@
 		<meta charset="utf-8">
 		<title>Portfolio Page</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="styles/main.css">
 		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
         <script src="https://use.fontawesome.com/c95a818228.js"></script>   
 	</head>
+	
   <body>
-    <!---- navigation start ---->
-  <div class="container-fluid">
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class=" nav navbar-header">
-           <a class="nav navbar-brand" href="#">Mike Mullen</a>
-        </div>
-         <ul class="nav navbar-nav navbar-right">
-          <li><a class="scroll" href="#top">About</a></li>
-          <li><a class="scroll" href="#portfolio">Portfolio</a></li>
-          <li><a class="scroll" href="#contact">Contact</a></li>
-         </ul>
-    </nav>
-  </div>
-    <!---- navigation end ---->
+  <!-- navigation start -->
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+            <div class="container">
+                <a href="#" class="navbar-brand">Mike Mullen</a>
+                <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#home" class="nav-link">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#explore-head-section" class="nav-link">Skills</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#create-head-section" class="nav-link">Portfolio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#share-head-section" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    <!-- navigation end -->
     
-    <!---- about start ---->
+    <!-- about section begin -->
     <main>
     <section id="about">
       <div class="container-fluid">
@@ -36,20 +49,24 @@
              <h2 class="name">Mike Mullen</h2>
              <h3 class="title">Full-Stack Web Developer</h3>
               <p class="summary">Front-End Developer and UX/UI designer, with practical experience in project management, branding strategy, and creative direction; devoted to functional programming and information architecture.
-              </p>
+
+</p>
             </div>
             <div class="socialBtns text-center">
-              <a class="btn btn-default" href="#"><i class="fa fa-linkedin-square" aria-hidden="true"></i>LinkedIn</a>
-              <a class="btn btn-default" href="#"><i class="fa fa-github" aria-hidden="true"></i>GitHub</a>
-              <a class="btn btn-default" href="#"><i class="fa fa-free-code-camp" aria-hidden="true"></i>freeCodeCamp</a>
+              <a class="btn btn-default" href="#"><i class="fa fa-linkedin-square" aria-hidden="true"></i>
+LinkedIn</a>
+              <a class="btn btn-default" href="#"><i class="fa fa-github" aria-hidden="true"></i>
+GitHub</a>
+              <a class="btn btn-default" href="#"><i class="fa fa-free-code-camp" aria-hidden="true"></i>
+freeCodeCamp</a>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!---- about end ---->
+      <!-- about section end -->
     
-    <!---- portfolio start ---->
+      <!-- portfolio section start -->
      <section id="portfolio">
        <div class="container-fluid">
          <div class="row">
@@ -61,44 +78,40 @@
          <div class="row">
            <div class="col-md-6">
              <p data-height="300" data-theme-id="0" data-slug-hash="KqQyZz" data-default-tab="result" data-user="mmullen227" data-embed-version="2" data-pen-title="Show Local Weather" class="codepen">See the Pen <a href="https://codepen.io/mmullen227/pen/KqQyZz/">Show Local Weather</a> by Mike Mullen (<a href="https://codepen.io/mmullen227">@mmullen227</a>) on <a href="https://codepen.io">CodePen</a>.</p>
-               <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
            </div>
            <div class="col-md-6">
              <p data-height="300" data-theme-id="0" data-slug-hash="jLOQeL" data-default-tab="result" data-user="mmullen227" data-embed-version="2" data-pen-title="Wiki View" class="codepen">See the Pen <a href="https://codepen.io/mmullen227/pen/jLOQeL/">Wiki View</a> by Mike Mullen (<a href="https://codepen.io/mmullen227">@mmullen227</a>) on <a href="https://codepen.io">CodePen</a>.</p>
-               <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
            </div>  
         </div>
         
         <div class="row">
            <div class="col-md-6">
              <p data-height="300" data-theme-id="0" data-slug-hash="owojXQ" data-default-tab="result" data-user="mmullen227" data-embed-version="2" data-pen-title="Random Quote Machine" class="codepen">See the Pen <a href="https://codepen.io/mmullen227/pen/owojXQ/">Random Quote Machine</a> by Mike Mullen (<a href="https://codepen.io/mmullen227">@mmullen227</a>) on <a href="https://codepen.io">CodePen</a>.</p>
-               <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
            </div>
            <div class="col-md-6">
              <p data-height="300" data-theme-id="0" data-slug-hash="jLOQeL" data-default-tab="result" data-user="mmullen227" data-embed-version="2" data-pen-title="Wiki View" class="codepen">See the Pen <a href="https://codepen.io/mmullen227/pen/jLOQeL/">Wiki View</a> by Mike Mullen (<a href="https://codepen.io/mmullen227">@mmullen227</a>) on <a href="https://codepen.io">CodePen</a>.</p>
-               <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
            </div>  
         </div>
         
         <div class="row">
            <div class="col-md-6">
              <p data-height="300" data-theme-id="0" data-slug-hash="KqQyZz" data-default-tab="result" data-user="mmullen227" data-embed-version="2" data-pen-title="Show Local Weather" class="codepen">See the Pen <a href="https://codepen.io/mmullen227/pen/KqQyZz/">Show Local Weather</a> by Mike Mullen (<a href="https://codepen.io/mmullen227">@mmullen227</a>) on <a href="https://codepen.io">CodePen</a>.</p>
-               <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
            </div>
            <div class="col-md-6">
              <p data-height="300" data-theme-id="0" data-slug-hash="jLOQeL" data-default-tab="result" data-user="mmullen227" data-embed-version="2" data-pen-title="Wiki View" class="codepen">See the Pen <a href="https://codepen.io/mmullen227/pen/jLOQeL/">Wiki View</a> by Mike Mullen (<a href="https://codepen.io/mmullen227">@mmullen227</a>) on <a href="https://codepen.io">CodePen</a>.</p>
-               <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
            </div>  
-        </div>
-         
-         
-         
-         
+        </div> 
        </div>
       </section>
-     <!---- portfolio end ---->
+      <!-- portfolio section end -->
            
-     <!---- contact begin ---->
+      <!-- contact section begin -->
      <section id="contact">
        <div class="container">
          <div class="row">
@@ -110,21 +123,17 @@
          <div class="row">
            
          </div>
-         </div>
+       </div>
      </section>
-      <!---- contact end ---->
-   
+      <!-- contact section end -->
     
     </main>
-      
-     <!---- footer begin ----> 
     <footer>
       
     </footer>
-     <!---- footer end ----> 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    	<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 	</body>
 </html>
