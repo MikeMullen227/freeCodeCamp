@@ -1,5 +1,7 @@
 body {
-font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    background: #333;
+    color: #fff;
 }
 
 /* --- navigation --- */
@@ -8,11 +10,9 @@ font-family: 'Roboto', sans-serif;
   font-size: 1.3em; 
 }
 
-.navbar-header {
-  padding-left: 30px;
-}
-.navbar-right {
-  padding-right: 50px;
+.navbar {
+    border-bottom: #008ed6 3px solid;
+    opacity: 0.9;
 }
 
 /* --- about --- */
@@ -20,7 +20,7 @@ font-family: 'Roboto', sans-serif;
 .about {
  background-image: url("http://www.desicomments.com/wp-content/uploads/2017/04/Beautiful-Photo-Of-Stars.jpg");
   background-size: cover;  
-  height: 800px;
+  height: 725px;
 }
 
 
@@ -29,7 +29,7 @@ font-family: 'Roboto', sans-serif;
   width: 250px;
   height: 250px;
   display: block;
-  margin: 150px auto 0;
+  margin: 150px auto 40px;
 }
 
 .name {
@@ -40,13 +40,30 @@ font-family: 'Roboto', sans-serif;
 .title {
   font-size: 2.0em;
   color: white;
-}
+}    
 
 .summary {
-  font-size: 1.8em;
+  font-size: 1.5em;
+  color: #fff;
+    
 }
 .btn-default {
   font-size: 1.6em;
   margin: 5px;
+  color: #fff;
 }
 
+fa {
+  width: 100px;
+  height: 100px;
+  background-color: #8cacea;
+  margin: 8px;
+}
+
+.social {
+    padding-left: 0;
+    list-style-type: none;
+}
+.socialBtns {
+    
+}
