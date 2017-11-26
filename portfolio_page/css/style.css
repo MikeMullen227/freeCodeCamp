@@ -17,10 +17,11 @@ body {
 
 /* --- about --- */
 
-.about {
- background-image: url("http://www.desicomments.com/wp-content/uploads/2017/04/Beautiful-Photo-Of-Stars.jpg");
+#home-section {
+  background-image: url("http://www.desicomments.com/wp-content/uploads/2017/04/Beautiful-Photo-Of-Stars.jpg") ;
   background-size: cover;  
-  height: 725px;
+  min-height: 725px;
+    background-attachment: fixed;
 }
 
 
@@ -66,4 +67,24 @@ fa {
 }
 .socialBtns {
     
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #fff;
+    margin: 1em 0;
+    padding: 0; 
+}
+
+.linkedIn {
+    background-color: #0077B5;
+}
+
+.freeCodeCamp {
+    background-color: green;
+}
+.github {
+    background-color: black;
 }
