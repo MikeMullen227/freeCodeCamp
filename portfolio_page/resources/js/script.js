@@ -1,6 +1,6 @@
 $(document).ready(function() {
     
-    $('.js--section-portfolio').waypoint(function(direction) {
+    $('.js--section-skills').waypoint(function(direction) {
         if(direction == 'down') {
             $('nav').addClass('sticky');
         } else {

@@ -6,25 +6,23 @@ body {
 
 /* --- main navigation --- */
 
-.nav {
-  font-size: 1.3em; 
+nav {
+  font-size: 1.4em; 
+  color: #fff !important;
 }
 
-.navbar {
-    
+.nav-item {
+    padding: 5px;
+    color: #fff !important;
 }
+
 
 /* --- sticky navigation --- */
 
-.nav {
-  font-size: 1.3em; 
-}
-
 .sticky {
     border-bottom: #008ed6 3px solid;
-    opacity: 0.9;
-    background-color: #fff;
-    color: #111;
+    background-color: #fff !important;
+    color: #008ed6 !important;
 }
 
 
