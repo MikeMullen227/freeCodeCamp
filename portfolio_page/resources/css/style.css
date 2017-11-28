@@ -4,16 +4,29 @@ body {
     color: #fff;
 }
 
-/* --- navigation --- */
+/* --- main navigation --- */
 
 .nav {
   font-size: 1.3em; 
 }
 
 .navbar {
+    
+}
+
+/* --- sticky navigation --- */
+
+.nav {
+  font-size: 1.3em; 
+}
+
+.sticky {
     border-bottom: #008ed6 3px solid;
     opacity: 0.9;
+    background-color: #fff;
+    color: #111;
 }
+
 
 /* --- about --- */
 
@@ -21,7 +34,7 @@ body {
   background-image: url("http://www.desicomments.com/wp-content/uploads/2017/04/Beautiful-Photo-Of-Stars.jpg") ;
   background-size: cover;  
   min-height: 725px;
-    background-attachment: fixed;
+  background-attachment: fixed;
 }
 
 
