@@ -7,15 +7,28 @@ body {
 /* --- main navigation --- */
 
 nav {
-  font-size: 1.4em; 
-  color: #fff !important;
+  font-size: 1.3em; 
 }
 
-.nav-item {
-    padding: 5px;
-    color: #fff !important;
+.nav-link {
+    display: inline;
+    padding-bottom: 4px;
 }
 
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff;
+}  
+
+
+ .navbar-nav a:hover,
+ .navbar-nav a:active {
+    border-bottom: 2px solid #008ed6;
+    
+}    
+
+.navbar-dark .navbar-toggler {
+    border-color: #fff;
+}
 
 /* --- sticky navigation --- */
 
