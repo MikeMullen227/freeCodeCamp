@@ -9,6 +9,10 @@ body {
 .navbar {
   font-size: 1.3em; 
   padding: 10px 0;
+  font-size: 15px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+    
 }
 
 .nav-link {
