@@ -1,7 +1,7 @@
 body {
     font-family: 'Roboto', sans-serif;
-    background: #333;
     color: #fff;
+    background: #333;
 }
 
 /* --- main navigation --- */
@@ -12,7 +12,6 @@ body {
   font-size: 15px;
   letter-spacing: 1px;
   text-transform: uppercase;
-    
 }
 
 .nav-link {
@@ -21,11 +20,13 @@ body {
     margin-left: 10px;
 }
 
-.navbar-dark .navbar-nav .nav-link { color: #fff; }  
-
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff;
+}
 
  .navbar-nav a:hover,
  .navbar-nav a:active {
+    color: #007bff !important;   
     border-bottom: 2px solid #007bff;
     
 }    
@@ -34,23 +35,26 @@ body {
 
 .logo-black { display: none; }
 
-/* --- sticky navigation --- */
+/* --- fixed navigation --- */
 
-.sticky {
+.fixed-top {
     background-color: rgba(255, 255, 255, 0.98) !important;
     box-shadow: 0 2px 2px #007bff;
     padding: 0;
 }
 
+.fixed-top .navbar-nav a:hover,
+.fixed-top .navbar-nav a:active {
+    color: #007bff;   
+}   
 
+.fixed-top .logo { display: none; }
 
-.sticky .logo { display: none; }
+.fixed-top .logo-black { display: block; }
 
-.sticky .logo-black { display: block; }
+.fixed-top .navbar-brand { margin-right: 0; }
 
-.sticky .navbar-brand { margin-right: 0; }
-
-.sticky .nav-link { 
+.fixed-top .nav-link { 
     color: black; 
     padding-bottom: 12px;
 
@@ -61,7 +65,7 @@ body {
 #home-section {
   background-image: url("http://www.desicomments.com/wp-content/uploads/2017/04/Beautiful-Photo-Of-Stars.jpg") ;
   background-size: cover;  
-  min-height: 725px;
+  min-height: 825px;
   background-attachment: fixed;
 }
 
@@ -71,52 +75,37 @@ body {
   width: 250px;
   height: 250px;
   display: block;
-  margin: 150px auto 40px;
+  margin: 100px auto 40px;
 }
 
 .name {
-  font-size: 4.0em;
+  font-size: 3.0em;
   color: white;
+  margin: 0;
 }
 
 .title {
   font-size: 2.0em;
   color: white;
+  margin-bottom: 40px;   
 }    
 
-.summary {
-  font-size: 1.5em;
-  color: #fff;
-    
-}
+
+/* -- social buttons -- */
+
 .btn-default {
-  font-size: 1.6em;
+  font-size: 1.3em;
   margin: 5px;
   color: #fff;
+  padding: 5px;
 }
 
-fa {
-  width: 100px;
-  height: 100px;
-  background-color: #8cacea;
-  margin: 8px;
-}
+.fa { padding: 3px; }
+
 
 .social {
     padding-left: 0;
     list-style-type: none;
-}
-.socialBtns {
-    
-}
-
-hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #fff;
-    margin: 1em 0;
-    padding: 0; 
 }
 
 .linkedIn {
@@ -128,4 +117,51 @@ hr {
 }
 .github {
     background-color: black;
+}
+
+
+/* -- skills section -- */
+
+#skills {
+    min-height: 830px;
+    background-color: #807b7b;
+}
+
+.skills-row {
+   padding: 50px; 
+}
+
+#js-icon {
+    padding-top: 7px;
+}
+
+/* -- portfolio section -- */
+
+#portfolio {
+    min-height: 800px;
+}
+
+/* -- contact section -- */
+
+#about {
+    min-height: 800px;
+    background-color: #807b7b;
+
+}
+
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #fff;
+    margin: 1em 0;
+    padding: 0; 
+}
+
+
+.summary {
+  font-size: 1.5em;
+  color: #fff;
+    
 }

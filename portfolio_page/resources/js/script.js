@@ -1,17 +1,22 @@
 $(document).ready(function() {
     
-    /* For the sticky navigation */
+    
+    /* skill icon animations */
+    $('img').on('hover', function() {
+        $(this).addClass('animated pulse');
+    });
+    /* For the fixed navigation */
     
     $('.js--section-skills').waypoint(function(direction) {
         if(direction == 'down') {
-            $('nav').addClass('sticky');
+            $('nav').addClass('fixed-top ');
             $('nav').removeClass('navbar-dark');
         } else {
-            $('nav').removeClass('sticky');
+            $('nav').removeClass('fixed-top');
             $('nav').addClass('navbar-dark');
         }
     }, {
-           offset: '190px;'   
+           offset: '65px;'   
     });
     
     /* Navigation Scroll */

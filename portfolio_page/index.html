@@ -6,13 +6,15 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 		<!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <link rel="stylesheet" href="vendors/css/animate.css">
         <link rel="stylesheet" type="text/css" href="resources/css/style.css">
         <script src="https://use.fontawesome.com/c95a818228.js"></script>   
 	</head>
 	
   <body>
   <!-- navigation start -->
-        <nav class="navbar navbar-dark navbar-expand-sm fixed-top">
+       <header id="home-section">
+        <nav class="navbar navbar-expand-sm navbar-dark">
             <div class="container">
                 <a href="#" class="navbar-brand"><img width="92" alt="MM Logo White" src="resources/images/logos/MM_logo_white.svg" class="logo"/></a>
                 <a href="#" class="navbar-brand"><img width="65" alt="MM Logo Black" src="resources/images/logos/MM_logo_black-01.svg" class="logo-black"/></a>
@@ -28,7 +30,7 @@
                             <a href="#portfolio" class="nav-link">Portfolio</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#contact" class="nav-link">Contact</a>
+                            <a href="#about" class="nav-link">About</a>
                         </li>
                     </ul>
                 </div>
@@ -37,8 +39,8 @@
     <!-- navigation end -->
     
     <!-- about section begin -->
-    <main>
-    <header id="home-section">
+    
+    
       <div class="container">
         <div class="row">
           <div class="col-md-8 offset-md-2 mt-4 text-center">
@@ -69,7 +71,7 @@
       <!-- about section end -->
       
       <!-- skills section start -->
-      
+    <main>
      <section id="skills" class="js--section-skills">
         <div class="container">
             <div class="row">
@@ -88,12 +90,12 @@
                     </div>
                     <div class="col-lg-3 col-sm-6 col-xs-12 skillIcon">
                        <div class="p-4 text-center">
-                          <img width="128" alt="CSS3 Logo" src="resources/images/css3_icons/css3-original-wordmark.svg"/>    
+                          <img class="skill-icon" width="128" alt="CSS3 Logo" src="resources/images/css3_icons/css3-original-wordmark.svg"/>    
                        </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6 col-xs-12 skillIcon">
+                    <div class="col-lg-3 col-sm-6 col-xs-12 skillIcon" id="js-icon">
                        <div class="p-4 text-center">
-                          <img width="128" height="128" alt="JavaScript Logo" src="resources/images/javascript_icons/javascript-original.svg"/>
+                          <img width="120" alt="JavaScript Logo" src="resources/images/javascript_icons/javascript-original.svg"/>
                        </div>
                     </div>
                     <div class="col-lg-3 col-sm-6 col-xs-12 skillIcon">
@@ -103,24 +105,24 @@
                     </div>
                  </div>
                  <div class="row skills-row">
-                    <div class="col-lg-3 col-sm-6 col-xs-12 skillIcon">
-                       <div class="p-4 text-center">
-                          <img width="128" alt="Bootstrap Logo" src="resources/images/bootstrap_icons/bootstrap-plain-wordmark.svg"/>
-                       </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 col-xs-12 skillIcon">
-                       <div class="p-4 text-center">
-                          <img width="128" alt="Git Logo" src="resources/images/git_icons/git-plain-wordmark.svg">
-                       </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 col-xs-12 skillIcon">
+                   <div class="col-lg-3 col-sm-6 col-xs-12 skillIcon">
                        <div class="p-4 text-center">
                           <img width="128" alt="Ruby Logo" src="resources/images/ruby_icons/ruby-original-wordmark.svg">
                        </div>
                     </div>
                     <div class="col-lg-3 col-sm-6 col-xs-12 skillIcon">
                        <div class="p-4 text-center">
-                          <img width="128" alt="Rails Logo" src="resources/images/rails_icons/rails-original-wordmark.svg"/>
+                          <img width="122" alt="Rails Logo" src="resources/images/rails_icons/rails-original-wordmark.svg"/>
+                       </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-xs-12 skillIcon">
+                       <div class="p-4 text-center">
+                          <img width="122" alt="Bootstrap Logo" src="resources/images/bootstrap_icons/bootstrap-plain-wordmark.svg"/>
+                       </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-xs-12 skillIcon">
+                       <div class="p-4 text-center">
+                          <img width="128" alt="Git Logo" src="resources/images/git_icons/git-plain-wordmark.svg">
                        </div>
                     </div>
                  </div>
@@ -175,65 +177,49 @@
       </section>
       <!-- portfolio section end -->
            
-      <!-- contact section begin -->
-     <section id="contact">
+      <!-- about section begin -->
+     <section id="about">
        <div class="container">
          <div class="row">
            <div class="col-md-12 text-center">
             <div class="p-4 mt-5">
-             <h2>Contact</h2>
+             <h2>About</h2>
              <hr class="something-else">
             </div>
            </div>
          </div>
          <div class="row">
-           <div class="col text-center">
+           <div class="col-md-6 text-center">
              <div class="py-4">
-                 <button class="btn btn-primary" data-toggle="modal" data-target="#contactModal">
-                     Contact Me
-                 </button>
+                 <h5>I'm a web developer from Miami, Florida.</h5>
+             </div>
+           </div>
+           <div class="col-md-6">
+             <div class="py-4">
+                 <h3>Contact Me!</h3>
+                 <hr>
+                <form>
+                  <div class="form-group">
+                    <label for="InputName">Name</label>
+                    <input type="name" class="form-control" id="contact-name" placeholder="Enter name">
+                  </div>
+                  <div class="form-group">
+                    <label for="InputEmail">Email</label>
+                    <input type="email" class="form-control" id="contact-email" placeholder="Enter Email">
+                  </div>
+                  <div class="form-group">
+                    <label for="InputMessage">Message</label>
+                    <textarea class="form-control" id="contact-message" placeholder="Lets talk!" rows="3"></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
              </div>
            </div>
          </div>
        </div>
      </section>
-     
-       <!-- CONTACT MODAL -->
-           <div class="modal fade text-dark" id="contactModal">
-               <div class="modal-dialog">
-                   <div class="modal-content">
-                       <div class="modal-header">
-                           <h5 class="modal-title" id="contactModalTitle">
-                               Contact Me
-                           </h5>
-                       </div>
-                       <div class="modal-body">
-                           <form>
-                               <div class="form-group">
-                                  <label for="name">Name</label>
-                                  <input type="text" class="form-control">
-                               </div>
-                               <div class="form-group">
-                                  <label for="email">Email</label>
-                                  <input type="text" class="form-control">
-                               </div>
-                               <div class="form-group">
-                                  <label for="message">Message</label>
-                                  <textarea class="form-control"></textarea>
-                               </div>
-                           </form>
-                       </div>
-                       <div class="modal-footer">
-                           <button class="btn btn-primary btn-block">Submit</button>
-                       </div>
-                   </div>
-               </div>
-           </div>
            
-           
-      <!-- contact section end -->
-    
-    
+      <!-- about section end -->
     </main>
     <footer>
       
