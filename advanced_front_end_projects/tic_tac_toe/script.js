@@ -1,9 +1,15 @@
 $(document).ready(function() {
+  // variable where user selection is stored (X or O)
+  let $user
+  
+  // variable where computer selection is stored (X or O)
+  let $computer
+  
   // Get the modal
   const $modal = $('.modal');
-  
-  // Get the <span> element that closes the modal
-  const $close = $('.close');
+    
+  // Get the X or O <span> element 
+  const $selection = $('.selection');
     
   const $modalContent = $('.modal-content')
   
@@ -11,10 +17,15 @@ $(document).ready(function() {
   $modal.css('display', 'block');
   
   
-  // When the user clicks on <span> (x), close the modal
-    $($close).on('click', function() {
+  // When the user clicks on <span> X or O, close the modal and store the value of whichever one was clicked
+    $($selection).click(function() {
       $modal.css('display', 'none');
+      $user = $(this).val();
     });
+    
+    $user == 'X' ? $computer = 'O' : $computer = 'X'
+    
+    console.log($computer)
 
     
     $(document).click(function(event) {
