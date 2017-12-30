@@ -1,15 +1,19 @@
 $(document).ready(function() {
     
-    
+    console.log($('img'))
     /* skill icon animations */
-    $('img').on('hover', function() {
+    $('.skillIcon').mouseover(function() {
         $(this).addClass('animated pulse');
+    });
+    
+    $('.skillIcon').mouseout(function() {
+        $(this).removeClass('animated pulse');
     });
     /* For the fixed navigation */
     
     $('.js--section-skills').waypoint(function(direction) {
         if(direction == 'down') {
-            $('nav').addClass('fixed-top ');
+            $('nav').addClass('fixed-top'); 
             $('nav').removeClass('navbar-dark');
         } else {
             $('nav').removeClass('fixed-top');
