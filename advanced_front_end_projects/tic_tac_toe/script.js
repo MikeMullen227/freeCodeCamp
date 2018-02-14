@@ -25,7 +25,17 @@ $(function () {
         
     }
 
+     //check if the occupiedSpaces array has the randomly generated number. if it does, repeat. if not, return that value
     function checkBoard() {
+         
+        let randomLocation = getRandomInt(9)
+        while(true) {
+            if(!occupiedSpaces.includes(randomLocation)) {
+                return randomLocation;
+            } else {
+                randomLocation = getRandomInt(9)    
+            }
+        }
         
     }
     
@@ -46,15 +56,16 @@ $(function () {
             $modal.css('display', 'none');
         }
     }
+    
+    // Search through all the tables td cells to find the corresponding value returned from checkBoard. When found, place X or O on board. 
+    function computerTurn(freeSpace) {
 
-    function computerTurn() {
-        while(getRandomInt(9) == occupiedSpaces) {
-            getRandomInt(9);
-        }
-        
+        $('table td').filter(function() {
+            return $(this).val() === freeSpace();
+        }).append(computer);
     }
+    
     // When the human clicks a cell, place human value on cell. 
-
     function placeValuesOnBoard(event) {
         let $target = $(event.target);
         // Make sure cell doesn't already have an '<i>' or is an '<i>'.
@@ -71,17 +82,19 @@ $(function () {
         let removedLocation = Board.slice(ID, nextID).shift();
         occupiedSpaces.push(removedLocation);
         
-        console.log(ID)
-        console.log(Board)
-        console.log(removedLocation)
-        console.log(occupiedSpaces);
+        //console.log(ID)
+        //console.log(Board)
+        //console.log(removedLocation)
+        //console.log(occupiedSpaces);
         
         // Call function that generates computers selection. 
-        computerTurn();
+        computerTurn(checkBoard);
     }
 
+    //Human clicks X or O. Values are assigned to human and computer.
     $('#myModal').click(assignPlayers);
 
+    //Human clicks cell on board and value is placed. This function then runs the computers turn.
     $('table').click(placeValuesOnBoard);
 
 
