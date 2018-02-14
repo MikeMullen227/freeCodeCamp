@@ -8,7 +8,7 @@ $(function () {
                     [0, 4, 8], [2, 4, 6]];
     
     var occupiedSpaces = [];
-    var Board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    var board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
     // Get the modal
     const $modal = $('.modal');
@@ -16,6 +16,9 @@ $(function () {
 
     // After the content in the window loads, run the modal
         $modal.css('display', 'block');
+    
+    
+    
     
     function startGame() {
         
@@ -25,23 +28,7 @@ $(function () {
         
     }
 
-     //check if the occupiedSpaces array has the randomly generated number. if it does, repeat. if not, return that value
-    function checkBoard() {
-         
-        let randomLocation = getRandomInt(9)
-        while(true) {
-            if(!occupiedSpaces.includes(randomLocation)) {
-                return randomLocation;
-            } else {
-                randomLocation = getRandomInt(9)    
-            }
-        }
-        
-    }
-    
-    function getRandomInt(max) {
-        return Math.floor(Math.random() * Math.floor(max));
-    }
+
     
     // When the human clicks on button X or O, close the modal and store the values.
     function assignPlayers(event) {
@@ -57,45 +44,42 @@ $(function () {
         }
     }
     
-    // Search through all the tables td cells to find the corresponding value returned from checkBoard. When found, place X or O on board. 
-    function computerTurn(freeSpace) {
-
-        $('table td').filter(function() {
-            return $(this).val() === freeSpace();
-        }).append(computer);
+    function removeFromBoard(cell) {
+        let removed = board.splice(board.indexOf(cell), 1).shift();
+        occupiedSpaces.push(removed)
+        return removed
     }
     
-    // When the human clicks a cell, place human value on cell. 
-    function placeValuesOnBoard(event) {
+    // When the human clicks a cell, place human value on square. 
+    function placeValuesOnboard(event) {
         let $target = $(event.target);
-        // Make sure cell doesn't already have an '<i>' or is an '<i>'.
+        // Make sure square doesn't already have an '<i>' or is an '<i>'.
         if ($target.has('i').length || $target.is('i')) {
-            console.log('test');
             return;
         }
         // add human value to board
         $target.append(human);
         
-        // remove humans location id from board array and place in occupiedSpace array
-        let ID = $target.attr('id');
-        let nextID = parseInt(ID) + 1;
-        let removedLocation = Board.slice(ID, nextID).shift();
-        occupiedSpaces.push(removedLocation);
+        // remove humans square id from board array and place in occupiedSpace array
+        let ID = parseInt($target.attr('id'));
+        removeFromBoard(ID)
         
-        //console.log(ID)
-        //console.log(Board)
-        //console.log(removedLocation)
-        //console.log(occupiedSpaces);
+        //generate a random number from what numbers are left in the board array.
+        let randomLocation = board[Math.floor(Math.random() * board.length)]
         
-        // Call function that generates computers selection. 
-        computerTurn(checkBoard);
+        //remove computers square from board array
+        removeFromBoard(randomLocation);
+        
+        //add computers value to square
+        $('#' + randomLocation).append(computer);
+        
     }
 
     //Human clicks X or O. Values are assigned to human and computer.
     $('#myModal').click(assignPlayers);
 
     //Human clicks cell on board and value is placed. This function then runs the computers turn.
-    $('table').click(placeValuesOnBoard);
+    $('table').click(placeValuesOnboard);
 
 
 });
