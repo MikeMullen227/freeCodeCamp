@@ -3,7 +3,7 @@ $(function () {
     let computer = '';
     const X = '<i class= "fas fa-times fa-7x"></i>';
     const O = '<i class="far fa-circle fa-6x"></i>';
-    var wins = {
+    let wins = {
         human: [[0, 1, 2], [3, 4, 5], [6, 7, 8],
                 [0, 3, 6], [1, 4, 7], [2, 5, 8],
                 [0, 4, 8], [2, 4, 6]],
@@ -12,21 +12,17 @@ $(function () {
                 [0, 4, 8], [2, 4, 6]]
     }
 
-    var occupiedSpaces = {
+    let occupiedSpaces = {
         human: [],
         computer: []
     }
-
-    var board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    
+    let currentBoard = [];
+    
+    console.log(currentBoard)
+    let board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
     
-// Get the modal
-        let $modal = $('.modal');
-        let $modalContent = $('.modal-content')
-   
- // After the content in the window loads, run the modal
-            $modal.css('display', 'block');
-
 
     // When the human clicks on button X or O, close the modal and store the values.
     function assignPlayers(event) {
@@ -59,23 +55,37 @@ $(function () {
                 })
             })
         })
-        // need to remove the current square from occupiedSpaces to avoid repeats because everytime the checkWin function is called it adds the current square to the players wins.
+        // need to remove the current square from occupiedSpaces to avoid repeats because everytime the checkWin function is called it adds all the players squares to the players wins.
         occupiedSpaces[player].pop()
     }
 
-
-    /*
+            
     function modal(type) {
-        // Get the modal
-        let $modal = $('.modal');
-        let $modalContent = $('.modal-content')
-        if(type === 'start') {
-            // After the content in the window loads, run the modal
-            $modal.css('display', 'block');
-        }
         
+     // Get the modal
+        let $modal = $('.modal');
+        let $modalContent = $('.modal-content');
+        let $modalDisplay = $modal.css('display', 'block');
+        
+        let $modalBody = $modalContent.find('.modal-body');
+        
+        let tie = "<p>The game is a tie!<br><br>If you would like to play again, choose X or O.</p>";
+        let win = "<p>Congratulations you won!<br><br> If you would like to play again, choose X or O.</p>";
+        let lose = "<p>Sorry but you lost!<br><br> If you would like to play again, choose X or O.</p>";
+       
+        if(type === 'start') {
+            $modalBody;
+        } else if(type === 'tie') {
+            $modalBody.empty('p');
+            $modalBody.append(tie);
+        } else if(type === 'win') {
+            $modalBody.empty('p');
+            $modalBody.append(win);
+        } else if(type === 'lose') {
+            $modalBody.empty('p');
+            $modalBody.append(lose);
+        }
     }
-    */
     
 
     function placeValuesOnboard(event) {
@@ -114,28 +124,25 @@ $(function () {
 
     }
 
-
     //Human clicks X or O. Values are assigned to human and computer.
     $('#myModal').click(assignPlayers);
 
-    //Human clicks cell on board and value is placed. This function then runs the computers turn.
+    
+     //Human clicks cell on board and value is placed. This function then runs the computers turn.
     $('table').click(placeValuesOnboard);
 
 
-});
+modal('start');
 
 
-
-
-
-
-/*
 function startGame() {
-    modal('start');
-    
+      
 }
 
 function replay() {
 
 }
-*/
+
+    
+    
+});
