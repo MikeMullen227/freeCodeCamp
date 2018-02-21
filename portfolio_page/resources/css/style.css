@@ -37,11 +37,17 @@ body {
 
 /* --- fixed navigation --- */
 
+
 .fixed-top {
     background-color: rgba(255, 255, 255, 0.98) !important;
     box-shadow: 0 2px 2px #007bff;
     padding: 0;
 }
+
+.fixed-top .navbar-brand a:hover,
+.fixed-top .navbar-brand a:active {
+    color: #007bff;   
+}   
 
 .fixed-top .navbar-nav a:hover,
 .fixed-top .navbar-nav a:active {
@@ -139,6 +145,19 @@ body {
 
 #portfolio {
     min-height: 1600px;
+}
+
+.crop {
+    height: 300px;
+    /*width: 400px;*/
+    overflow: hidden;
+}
+
+
+.img-fluid {
+    width: 100%;
+    height: auto;
+    
 }
 
 /* -- contact section -- */

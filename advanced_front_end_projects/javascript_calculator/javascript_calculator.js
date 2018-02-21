@@ -118,8 +118,6 @@ $(document).ready(function() {
 $('button').click(function() {
      input = $(this).val();
      main();
-  console.log(entries)
-  console.log(currentEntry)
   });  
   
 });

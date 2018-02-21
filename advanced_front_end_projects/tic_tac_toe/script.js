@@ -1,8 +1,11 @@
 $(function () {
-    let human = '';
-    let computer = '';
-    const X = '<i class= "fas fa-times fa-7x"></i>';
-    const O = '<i class="far fa-circle fa-6x"></i>';
+    let humanImage = '';
+    let computerImage = '';
+    let humanValue = '';
+    let computerValue = ''
+    let $modal = $('.modal');
+    const xImage = '<i class= "fas fa-times fa-7x"></i>';
+    const oImage = '<i class="far fa-circle fa-6x"></i>';
     let wins = {
         human: [[0, 1, 2], [3, 4, 5], [6, 7, 8],
                 [0, 3, 6], [1, 4, 7], [2, 5, 8],
@@ -16,24 +19,27 @@ $(function () {
         human: [],
         computer: []
     }
-    
-    let currentBoard = [];
-    
-    console.log(currentBoard)
+
+    let currentBoard = ['', '', '', '', '', '', '', '', ''];
+
     let board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
-    
+
 
     // When the human clicks on button X or O, close the modal and store the values.
     function assignPlayers(event) {
         let $value = $(event.target).val();
         if ($value == 'X') {
-            human = X;
-            computer = O
+            humanImage = xImage;
+            computerImage = oImage;
+            humanValue = 'X';
+            computerValue = 'O'
             $modal.css('display', 'none');
         } else if ($value == 'O') {
-            human = O;
-            computer = X
+            humanImage = oImage;
+            computerImage = xImage;
+            humanValue = 'O';
+            computerValue = 'X'
             $modal.css('display', 'none');
         }
     }
@@ -49,7 +55,7 @@ $(function () {
                         array.push(currentSquare)
                     }
                     if (array.length === 6) {
-                        console.log(player + 'is the winner!')
+                        console.log(player + '  is the winner!')
                         //winner(player)
                     }
                 })
@@ -59,34 +65,82 @@ $(function () {
         occupiedSpaces[player].pop()
     }
 
+
+    function findTwoInARow(player, playerValue) {
+
+        wins[player].forEach(function (array) {
+            let count = 0
+            let unoccupiedSpace;
+            array.forEach(function (element, index) {
+                if (element === playerValue) {
+                    count++;
+                }
+            })
+            if (count === 2) {
+                unoccupiedSpace = array.filter(element => element !== playerValue)
+            }
             
-    function modal(type) {
+            if(count === 3) {
+                console.log('winner')
+            }
+            // computer must place a value on the unoccupied space to prevent a win
+            $('#' + unoccupiedSpace[0]).append(computerImage);
+
+        })
+
+    }
+    replaceWinsWithCurrentBoard('human');
+    findTwoInARow('human', humanValue)
+
+
+
+    /*
+    function computerStrategy() {
+        // Win: if computer has 2 in a row, place 3rd to win the game
+        currentBoard.forEach(function(value, index) {
+            if(value != '') {
+              console.log(value)
+              console.log(index)
+                wins['human'].forEach(function(array) {
+                array.forEach(function(element) {
+                if(element === index) {
+                  array.splice(array.indexOf(element), 1, value);
+                }
+              })
+            })
+            }
+        })
         
-     // Get the modal
-        let $modal = $('.modal');
+    }
+*/
+
+    function modal(type) {
+
+        // Get the modal
+
         let $modalContent = $('.modal-content');
         let $modalDisplay = $modal.css('display', 'block');
-        
+
         let $modalBody = $modalContent.find('.modal-body');
-        
+
         let tie = "<p>The game is a tie!<br><br>If you would like to play again, choose X or O.</p>";
         let win = "<p>Congratulations you won!<br><br> If you would like to play again, choose X or O.</p>";
         let lose = "<p>Sorry but you lost!<br><br> If you would like to play again, choose X or O.</p>";
-       
-        if(type === 'start') {
+
+        if (type === 'start') {
             $modalBody;
-        } else if(type === 'tie') {
+        } else if (type === 'tie') {
             $modalBody.empty('p');
             $modalBody.append(tie);
-        } else if(type === 'win') {
+        } else if (type === 'win') {
             $modalBody.empty('p');
             $modalBody.append(win);
-        } else if(type === 'lose') {
+        } else if (type === 'lose') {
             $modalBody.empty('p');
             $modalBody.append(lose);
         }
     }
-    
+
 
     function placeValuesOnboard(event) {
         let $target = $(event.target);
@@ -94,8 +148,8 @@ $(function () {
         if ($target.has('i').length || $target.is('i')) {
             return;
         }
-        // add human value to board
-        $target.append(human);
+        // add human value to board as an image
+        $target.append(humanImage);
 
         // remove humans square id from board array and place in occupiedSpace array
         let ID = parseInt($target.attr('id'));
@@ -103,46 +157,74 @@ $(function () {
 
         // check if human won the game
         checkWin('human');
+
+        //computerStrategy();
+
+
         //generate a random number from what numbers are left in the board array.
         let randomLocation = board[Math.floor(Math.random() * board.length)]
 
         //remove computers square from board array
         removeFromBoardArray(randomLocation, 'computer');
 
-        //add computers value to square
-        $('#' + randomLocation).append(computer);
+        //add computers value to square as an image
+        $('#' + randomLocation).append(computerImage);
 
         // check if computer won the game
         checkWin('computer')
+
+        console.log(occupiedSpaces.human)
+        console.log(occupiedSpaces.computer)
 
     }
 
 
     function removeFromBoardArray(cell, player) {
+        //remove the cell number from the board and place it in the occupied spaces so the computer knows which cells are occupied
         let removed = board.splice(board.indexOf(cell), 1).shift();
         occupiedSpaces[player].push(removed)
 
+        // place an X or O in the current board array so the computer knows where the human and computer inputs are so it can devise a strategy and place its input on the board
+        if (player == 'human') {
+            currentBoard.splice(removed, 1, humanValue)
+        } else {
+            currentBoard.splice(removed, 1, computerValue)
+        }
+
     }
 
+    function replaceWinsWithCurrentBoard(player) {
+        currentBoard.forEach(function (value, index1) {
+            if (value !== '') {
+                wins[player].forEach(function (array) {
+                    array.forEach(function (element, index2) {
+                        if (element === index1) {
+                            array.splice(index2, 1, value);
+                        }
+                    })
+                })
+            }
+        })
+    }
     //Human clicks X or O. Values are assigned to human and computer.
     $('#myModal').click(assignPlayers);
 
-    
-     //Human clicks cell on board and value is placed. This function then runs the computers turn.
+
+    //Human clicks cell on board and value is placed. This function then runs the computers turn.
     $('table').click(placeValuesOnboard);
 
 
-modal('start');
+    modal('start');
 
 
-function startGame() {
-      
-}
+    function startGame() {
 
-function replay() {
+    }
 
-}
+    function replay() {
 
-    
-    
+    }
+
+
+
 });
