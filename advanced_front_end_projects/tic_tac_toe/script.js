@@ -228,3 +228,89 @@ $(function () {
 
 
 });
+
+/*
+let wins = [[0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]];
+
+let humanMoves = [0, 2, 8];
+let winCount = [0,0,0,0,0,0,0,0];
+let humanValue = 'X';
+let computerValue = 'O';
+
+
+function computerPlay() {
+  humanMoves.forEach(function(value, i) {
+      console.log("value = " + value)
+      wins.forEach(function(array, j) {
+        console.log("array = " + array);
+        array.forEach(function(element, k) {
+          console.log("element = " + element);
+          if (value === element) {
+             array.splice(k, 1, humanValue);
+             winCount[j]++;
+             console.log("winCount[" + j + "] = " + winCount[j]);
+          }
+        });
+        blockWin(array, j, value);
+      });
+      
+    
+  });
+}
+
+function blockWin(array, countIndex, element) {
+  if (winCount[countIndex] === 2) {
+    //unoccupiedSpace = array.filter(element => element !== playerValue);
+    array.splice(array.filter(element => element !== humanValue && element !== computerValue), 1, computerValue);
+    winCount[countIndex] = 'blocked'
+    console.log("spliced wins = " + wins);
+    console.log(winCount)
+    //return true;
+  }
+}
+
+function findWin(countIndex) {
+  if (winCount[countIndex] === 3) {
+    console.log('winner');
+    throw null;
+  }
+}
+
+function firstMove() {
+  if(humanMoves.length === 1) {
+    if(value === 0 || value === 2 || value === 6 || value === 8) {
+      // if opening move is in the corner, place in the center
+      $('#' + 4).append(computerImage);
+    } else if(value === 1) {
+      $('#' + randomSpace(0,2,4)).append(computerImage);
+      
+    } else if(value === 3) {
+      $('#' + randomSpace(0,4,6)).append(computerImage);
+      
+    } else if(value === 5) {
+      $('#' + randomSpace(2,4,8)).append(computerImage);
+      
+    } else if(value === 7) {
+      $('#' + randomSpace(4,6,8)).append(computerImage);
+      
+    } else {
+      // if opening move is in the center, place in a random corner
+       $('#' + randomSpace(0,2,6,8)).append(computerImage); 
+    }
+  }
+}
+
+function randomSpace(...spaces) {
+            return spaces[Math.floor(Math.random() * spaces.length)]
+          }
+
+
+
+computerPlay();
+
+    
+    // computer must place a value on the unoccupied space to prevent a win
+    //$('#' + unoccupiedSpace[0]).append(computerImage);
+*/
