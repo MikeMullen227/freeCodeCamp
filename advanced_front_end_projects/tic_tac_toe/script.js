@@ -1,4 +1,5 @@
 $(function () {
+    let turn;
     let humanImage = '';
     let computerImage = '';
     let humanValue = '';
@@ -11,19 +12,15 @@ $(function () {
                 [0, 3, 6], [1, 4, 7], [2, 5, 8],
                 [0, 4, 8], [2, 4, 6]];
 
-    let occupiedSpaces = {
-        human: [],
-        computer: []
-    }
-
     let currentBoard = ['', '', '', '', '', '', '', '', ''];
-    let board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-    let humanMoves = [];
-    let computerMoves = [];
-    let winCount = [0, 0, 0, 0, 0, 0, 0, 0];
+    let moves = [];
+    let winCountHuman = [0, 0, 0, 0, 0, 0, 0, 0];
+    let winCountComputer = [0, 0, 0, 0, 0, 0, 0, 0];
+    
+    
+    
 
-
-    // When the human clicks on button X or O, close the modal and store the values.
+    // When the human clicks on button X or O, close the modal and store the values. If the human chooses O, the computer goes first.
     function assignPlayers(event) {
         let $value = $(event.target).val();
         if ($value == 'X') {
@@ -32,113 +29,199 @@ $(function () {
             humanValue = 'X';
             computerValue = 'O'
             $modal.css('display', 'none');
+            turn = 'human';
         } else if ($value == 'O') {
             humanImage = oImage;
             computerImage = xImage;
             humanValue = 'O';
             computerValue = 'X'
             $modal.css('display', 'none');
+            computerPlay();
         }
+    }
+    
+    // computer defensive moves
+
+    function blockFork() {
+        cell = randomSpace(1, 3, 5, 7);
+        $('#' + cell).append(computerImage);
+        placeInCurrentBoard(cell, 'computer');
     }
 
     function blockWin(array, countIndex, element) {
-        if (winCount[countIndex] === 2) {
-            unoccupiedSpace = array.filter(element => element !== humanValue && element !== computerValue);
+        if (winCountHuman[countIndex] === 2 && !array.includes(computerValue)) {
+            console.log(array)
+            console.log(!array.includes(computerValue))
+            let unoccupiedSpace = array.filter(element => element !== humanValue && element !== computerValue);
             console.log(unoccupiedSpace);
             array.splice(unoccupiedSpace, 1, computerValue);
-            winCount[countIndex] = 'blocked'
+            winCountHuman[countIndex] = 'blocked'
             //add computers value to cell as an image
             $('#' + unoccupiedSpace).append(computerImage);
-            console.log("spliced wins = " + wins);
-            console.log(winCount)
-            //return true;
+            //console.log("spliced wins = " + wins);
+            // console.log(winCountHuman)
+            //console.log(winCountComputer)
+            console.log('test2')            
         }
     }
+
+
+    function placeInMiddle() {
+        console.log('test')
+        function isOdd(element) {
+            if(element % 2 != 0) {
+               return element; 
+            }
+        }
+        
+        let centerArrays = wins.filter(function(array) {
+             if(array.indexOf(computerValue) > -1 && array.indexOf(humanValue) === -1) {
+                return array
+             }   
+        }).find(isOdd);
+        //console.log(centerArrays);
+    } 
     
-    function checkWinsArrays() {
-        humanMoves.forEach(function (value, i) {
-            console.log("value = " + value)
+    
+    
+    function addValueToWins() {
+        currentBoard.forEach(function (value, i) {
+           // console.log("value = " + value)
+           // console.log("index = " + i)
+
             wins.forEach(function (array, j) {
                 console.log("array = " + array);
                 array.forEach(function (element, k) {
-                    console.log("element = " + element);
-                    if (value === element) {
-                        array.splice(k, 1, humanValue);
-                        winCount[j]++;
-                        console.log("winCount[" + j + "] = " + winCount[j]);
+                    //console.log("element = " + element);
+                    if (value != '' && i === element) {
+                        array.splice(k, 1, value);
+                        value === humanValue ? winCountHuman[j]++ : winCountComputer[j++]
+                       // console.log("winCount[" + j + "] = " + winCountHuman[j]);
+                       // console.log("winCount[" + j + "] = " + winCountComputer[j]);
                     }
                 });
-                blockWin(array, j, value);
+                // always check to see if there is two in a row when adding values to wins
+                    blockWin(array, j, i);
             });
         });
+                
     }
 
     function computerPlay() {
-        switch(humanMoves.length) {  
-            case 1: 
-                firstMove(humanMoves[0]);
+        switch (moves.length) {
+            case 0:
+                firstMove(4);
+                break;
+            case 1:
+                firstMove(moves[0]);
                 break;
             case 2:
-                secondMove(humanMoves[1]);
-            case 3: 
+                secondMove(moves[1]);
+                break;
+            case 3:
+                secondMove(moves[2]);
+                break;
             case 4:
+                thirdMove(moves[3]);
             case 5:
-            
+                thirdMove(moves[2]);
+                break;
+            case 6:
+            case 7:
+                fourthMove(moves[3]);
+                break;
+            case 8:
+            case 9:
+                fifthMove(moves[4]);
         }
+        console.log(moves);
     }
 
     function findWin(countIndex) {
-        if (winCount[countIndex] === 3) {
-            console.log('winner');
-            throw null;
+        if (winCountHuman[countIndex] === 3) {
+            modal('win');
+            resetGame();
+        } else if (winCountComputer[countIndex] === 3) {
+            modal('lose');
+            resetGame();
         }
     }
     
-    function firstMove(value) { 
-            //once the computer decides where to put its first move, place it in the cell variable which will be pushed into computerMoves array
-            let cell;
-            //let append = $('#' + cell).append(computerImage);
+    // sequence of moves
 
-        switch(value) {
+    function firstMove(value) {
+        //once the computer decides where to put its first move, place it in the cell variable which will be pushed into computermoves array
+        let cell;
+
+        switch (value) {
             // if opening move is in the corner, place in the center
-            case 0:   
-            case 2:   
-            case 6:   
-            case 8: 
+            case 0:
+            case 2:
+            case 6:
+            case 8:
                 cell = 4;
-                $('#' + cell).append(computerImage);               
-                placeInMovesArray(cell, 'computer');
-                break;   
-            // if opening move is in the center, place in a random corner
+                $('#' + cell).append(computerImage);
+                placeInCurrentBoard(cell, 'computer');
+                break;
+                // if opening move is in the center, place in a random corner. if computer goes first always place in a random corner.
             case 4:
                 cell = randomSpace(0, 2, 6, 8);
                 $('#' + cell).append(computerImage);
-                placeInMovesArray(cell, 'computer');
+                placeInCurrentBoard(cell, 'computer');
                 break;
-            // if opening move is on an edge, place randomly in one of 3 best possible positions
+                // if opening move is on an edge, place randomly in one of 3 best possible positions
             case 1:
                 cell = randomSpace(0, 2, 4);
                 $('#' + cell).append(computerImage);
-                placeInMovesArray(cell, 'computer');
+                placeInCurrentBoard(cell, 'computer');
                 break;
-            case 3: 
+            case 3:
                 cell = randomSpace(0, 4, 6);
                 $('#' + cell).append(computerImage);
-                placeInMovesArray(cell, 'computer');               
+                placeInCurrentBoard(cell, 'computer');
                 break;
-            case 5:  
+            case 5:
                 cell = randomSpace(2, 4, 8);
                 $('#' + cell).append(computerImage);
-                placeInMovesArray(cell, 'computer');               
+                placeInCurrentBoard(cell, 'computer');
 
                 break;
-            case 7:  
+            case 7:
                 cell = randomSpace(4, 6, 8)
                 $('#' + cell).append(computerImage);
-                placeInMovesArray(cell, 'computer');               
+                placeInCurrentBoard(cell, 'computer');
                 break;
-        }  
+        }
+        addValueToWins();
     }
+
+    function secondMove(value) {
+
+        // if the player has occupied 2 corners on a diagonal, block the fork
+        if (currentBoard[0] === humanValue && currentBoard[8] === humanValue ||
+            currentBoard[2] === humanValue && currentBoard[6] === humanValue) {
+            blockFork();
+            addValueToWins();
+            console.log(wins)
+        } else {
+            console.log(wins) 
+            addValueToWins();   
+            console.log(wins);
+            // if the player does not create a fork or two in a row, place piece in either the middle row or middle column
+            placeInMiddle();
+            console.log(currentBoard);
+            console.log(currentBoard.length)
+        }
+    }
+    
+  
+    function thirdMove(value) {
+
+
+    }
+
+
+    
 
     function modal(type) {
 
@@ -167,16 +250,20 @@ $(function () {
         }
     }
 
-    function placeInMovesArray(cell, player) {
-        if(player === 'human') {
-            humanMoves.push(cell);
+    function placeInCurrentBoard(cell, player) {
+        if (player === 'human') {
+            currentBoard.splice(cell, 1, humanValue);
+            moves.push(cell);
+            //console.log(moves)
+            //console.log(currentBoard)
         } else {
-            computerMoves.push(cell);
+            currentBoard.splice(cell, 1, computerValue);
+            //console.log(currentBoard)
+            moves.push(cell);
         }
     }
 
-
-    function placeValuesOnboard(event) {
+    function placeValuesOnScreen(event) {
         let $target = $(event.target);
         // Make sure square doesn't already have an '<i>' or is an '<i>'.
         if ($target.has('i').length || $target.is('i')) {
@@ -185,69 +272,39 @@ $(function () {
         // add human value to board as an image
         $target.append(humanImage);
 
-        // remove humans square id from board array and place in humans moves array
+        // remove humans square id from board array and place in moves array
         let ID = parseInt($target.attr('id'));
-        placeInMovesArray(ID, 'human');
+        placeInCurrentBoard(ID, 'human');
 
         // run computerPlay function to check all scenarios and place its value on the board
         computerPlay();
 
-        //computerStrategy();
-
-
-//        //generate a random number from what numbers are left in the board array.
-//        let randomLocation = board[Math.floor(Math.random() * board.length)]
-//
-//        //remove computers square from board array
-//        removeFromBoardArray(randomLocation, 'computer');
-//
-//        //add computers value to square as an image
-//        $('#' + randomLocation).append(computerImage);
-//
-//        // check if computer won the game
-//        checkWin('computer')
-//
-//        console.log(occupiedSpaces.human)
-//        console.log(occupiedSpaces.computer)
-
     }
-    
-    
+
+
     function randomSpace(...spaces) {
         return spaces[Math.floor(Math.random() * spaces.length)]
     }
 
 
-    function replaceWinsWithCurrentBoard(player) {
-        currentBoard.forEach(function (value, index1) {
-            if (value !== '') {
-                wins[player].forEach(function (array) {
-                    array.forEach(function (element, index2) {
-                        if (element === index1) {
-                            array.splice(index2, 1, value);
-                        }
-                    })
-                })
-            }
-        })
+
+    function resetGame() {
+
     }
-    
-    
-    
-    function secondMove(value) {
-        // check to see if the player has 2 in a row. If so block it.
-        checkWinsArrays();
-    }
+
+
+
+
     modal('start');
     //Human clicks X or O. Values are assigned to human and computer.
     $('#myModal').click(assignPlayers);
 
 
     //Human clicks cell on board and value is placed. This function then runs the computers turn.
-    $('table').click(placeValuesOnboard);
+    $('table').click(placeValuesOnScreen);
 
 
-    
+
 
 
 
@@ -359,6 +416,22 @@ computerPlay();
     function replay() {
 
     }
+    
+    
+    function replaceWinsWithCurrentBoard(player) {
+        currentBoard.forEach(function (value, index1) {
+            if (value !== '') {
+                wins[player].forEach(function (array) {
+                    array.forEach(function (element, index2) {
+                        if (element === index1) {
+                            array.splice(index2, 1, value);
+                        }
+                    })
+                })
+            }
+        })
+    }
+
     
     
     
