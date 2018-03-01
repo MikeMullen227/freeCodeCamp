@@ -63,6 +63,7 @@ $(function () {
     function blockTwoInARow() {
         if(winCountHuman.includes('block') && win === false) {
             console.log(win)
+            console.log('yo ')
             let index = winCountHuman.indexOf('block');
             winCountHuman[index] = 'blocked';
             atLeastOneBlock = true;
@@ -305,11 +306,21 @@ $(function () {
         }
     }
     
+    
+      function placeInRandomSpot() {
+            cell = randomSpace(currentBoard.indexOf(''));
+            console.log(cell);
+            $('#' + cell).append(computerImage);
+            placeInCurrentBoard(cell, 'computer');
+            addValueToWins();
+        }
+        
   
     function thirdMove(value) {
             //if the human messed up and didn't block a computer win, this will make the win
             computerWin();
             // after the computer checks to see if it has two in a row, block the human if it has two in a row
+            findWin();
             blockTwoInARow();
         //console.log(winCountComputer)
             console.log(blocked)
@@ -317,17 +328,14 @@ $(function () {
             console.log(currentBoard)
         console.log(winCountHuman)
         console.log(winCountComputer)
-        findWin();
+        
         let emptySpaces = currentBoard.filter(cell => cell === '');
         console.log(emptySpaces)
-        if(emptySpaces.length === 4) {
-            cell = randomSpace(currentBoard.indexOf(''));
-            console.log(cell);
-            $('#' + cell).append(computerImage);
-            placeInCurrentBoard(cell, 'computer');
-            addValueToWins();
-        }
-        console.log('ummmmm')
+        if(emptySpaces.length === 4 && humanValue === 'X' || emptySpaces.length === 5 && humanValue === 'O') {
+            placeInRandomSpot()
+            console.log('ummmmm')
+        } 
+        
     }
 
     function fourthMove(value) {
@@ -335,20 +343,18 @@ $(function () {
         blockTwoInARow();
         findWin();
         let emptySpaces = currentBoard.filter(cell => cell === '');
-        if(emptySpaces.length === 2) {
-            cell = randomSpace(currentBoard.indexOf(''));
-            console.log(cell);
-            $('#' + cell).append(computerImage);
-            placeInCurrentBoard(cell, 'computer');
-            addValueToWins();
+        if(emptySpaces.length === 2 && humanValue === 'X' || emptySpaces.length === 3 && humanValue === 'O') {
+            placeInRandomSpot();
+            console.log('arrrrrggg')
         }
         console.log(emptySpaces)
     }
 
     function fifthMove(value) {
         computerWin();
-        blockTwoInARow();
         findWin();
+        blockTwoInARow();
+        placeInRandomSpot();
         modal('tie')
     }
     
