@@ -1,5 +1,7 @@
 $(function () {
     let turn;
+    let unoccupiedComputerSpace;
+    let unoccupiedHumanSpace;
     let blocked = false;
     let atLeastOneBlock = false;
     let humanImage = '';
@@ -7,6 +9,7 @@ $(function () {
     let humanValue = '';
     let computerValue = ''
     let $modal = $('.modal');
+    let win = false;
     const xImage = '<i class= "fas fa-times fa-7x"></i>';
     const oImage = '<i class="far fa-circle fa-6x"></i>';
 
@@ -49,53 +52,119 @@ $(function () {
         let cell = randomSpace(1, 3, 5, 7);
         $('#' + cell).append(computerImage);
         placeInCurrentBoard(cell, 'computer');
+        blocked = true;
+        addValueToWins();
     }
     
     
     
     
     
-    function twoValuesInARow2(player) {
-        if(player === 'computer') {
-            winCountComputer.forEach(function(element) {
-                if(element === 2) {
-                    
-                }
-            });
-        } else {
-            
-        }
-    }
-
-    function twoValuesInARow(array, countIndex, element) {
-        let unoccupiedSpace;
-        // if the computer has two in a row, add a third
-        if(winCountComputer[countIndex] === 2 && !array.includes(humanValue)){
-//            //add computers value to cell as an image
-//            unoccupiedSpace = array.filter(element => element !== humanValue && element !== computerValue).shift();
-//            $('#' + unoccupiedSpace).append(computerImage);
-//            placeInCurrentBoard(unoccupiedSpace, 'computer');
-//            addValueToWins();    
-//            //if the human has two in a row, block the win
-            console.log(winCountHuman)
-            console.log(winCountComputer)
-        } else if (winCountHuman[countIndex] === 2 && !array.includes(computerValue)) {
-             unoccupiedSpace = array.filter(element => element !== humanValue && element !== computerValue).shift();
-            array.splice(array.indexOf(unoccupiedSpace), 1, computerValue);
-            winCountHuman[countIndex] = 'blocked'
+    function blockTwoInARow() {
+        if(winCountHuman.includes('block') && win === false) {
+            console.log(win)
+            let index = winCountHuman.indexOf('block');
+            winCountHuman[index] = 'blocked';
             atLeastOneBlock = true;
+            blocked = true;
+            console.log(winCountHuman);
             
             //add computers value to cell as an image
-            $('#' + unoccupiedSpace).append(computerImage);
-            placeInCurrentBoard(unoccupiedSpace, 'computer');
+            $('#' + unoccupiedHumanSpace).append(computerImage);
+            placeInCurrentBoard(unoccupiedHumanSpace, 'computer');
             addValueToWins();
-            //console.log("spliced wins = " + wins);
-            
-            console.log('test2')
+        }
+    }
+        
+    function computerWin() {
+        if(winCountComputer.includes('possible win') && blocked === false) {
             console.log(winCountComputer)
-            console.log(winCountHuman)
+            console.log(blocked)
+            console.log(turn)
+            let index = winCountComputer.indexOf('possible win');
+            winCountComputer[index] = 3;
+            //add computers value to cell as an image
+            console.log(unoccupiedComputerSpace)
+            console.log(winCountComputer)
+            $('#' + unoccupiedComputerSpace).append(computerImage);
+            placeInCurrentBoard(unoccupiedComputerSpace, 'computer');
+            win = true;
+            //addValueToWins();
         } 
     }
+
+    function findTwoValuesInARow(array, countIndex, element) {
+        
+        
+        //if the human has two in a row, place a 'block' in the index of the array that needs to            be blocked
+        if (winCountHuman[countIndex] === 2 && !array.includes(computerValue)) {
+            unoccupiedHumanSpace = array.filter(element => element !== humanValue && element !== computerValue).shift();
+            array.splice(array.indexOf(unoccupiedHumanSpace), 1, computerValue);
+            winCountHuman[countIndex] = 'block'
+            console.log(winCountHuman);
+        } 
+        if (winCountComputer[countIndex] === 2 && !array.includes(humanValue)) {
+            console.log(!array.includes(humanValue))
+            console.log(array)
+            console.log('test')
+            console.log(blocked)
+            unoccupiedComputerSpace = array.filter(element => element !== humanValue && element !== computerValue).shift();
+            console.log(unoccupiedComputerSpace)
+            //array.splice(array.indexOf(unoccupiedComputerSpace), 1, computerValue); 
+            winCountComputer[countIndex] = 'possible win';
+            console.log(winCountComputer)
+            console.log(array)
+            
+        }
+        if (winCountComputer[countIndex] === 'possible win' && array.includes(humanValue)) {
+            console.log(array)
+                console.log(array.includes(humanValue))
+                winCountComputer[countIndex] = 'not a win';
+            console.log(winCountComputer);
+        }
+        console.log('outside')
+    }
+    
+    
+     function findWin() {
+         console.log(winCountComputer)
+        if (winCountHuman.includes(3)) {
+            modal('win');
+            resetGame();
+        } else if (winCountComputer.includes(3)) {
+            console.log('you lose')
+            win = true;
+            //modal('lose');
+            resetGame();
+        }
+    }
+    
+       
+    function addValueToWins() {
+        currentBoard.forEach(function (value, i) {
+           // console.log("value = " + value)
+           // console.log("index = " + i)
+            
+            wins.forEach(function (array, j) {
+               // console.log("array = " + array);
+                array.forEach(function (element, k) {
+                    //console.log("element = " + element);
+                    if (value != '' && i === element) {
+                        array.splice(k, 1, value);
+                        value === humanValue ? winCountHuman[j]++ : winCountComputer[j]++;
+                       // console.log("winCount[" + j + "] = " + winCountHuman[j]);
+                       // console.log("winCount[" + j + "] = " + winCountComputer[j]);
+                    }
+                });
+                    
+                // always check to see if there is two in a row when adding values to wins
+                   findTwoValuesInARow(array, j, i); 
+            });
+        });
+            
+        console.log(currentBoard)
+    }
+
 
     // if the player does not create a fork or two in a row and instead places in a corner and then an edge, place piece in either the middle row or middle column, whichever does'nt already have an opponents piece
     function cornerAndEdge() {
@@ -124,34 +193,9 @@ $(function () {
         console.log(typeof centerRowOrColumn[0]);
         console.log(firstEmptyCell)
     } 
+ 
     
-    function addValueToWins() {
-        currentBoard.forEach(function (value, i) {
-           // console.log("value = " + value)
-           // console.log("index = " + i)
-
-            wins.forEach(function (array, j) {
-                console.log("array = " + array);
-                array.forEach(function (element, k) {
-                    //console.log("element = " + element);
-                    if (value != '' && i === element) {
-                        array.splice(k, 1, value);
-                        value === humanValue ? winCountHuman[j]++ : winCountComputer[j]++;
-                       // console.log("winCount[" + j + "] = " + winCountHuman[j]);
-                       // console.log("winCount[" + j + "] = " + winCountComputer[j]);
-                    }
-                });
-                // always check for 3 in a row to determine a win
-                    //findWin(j);    
-                // always check to see if there is two in a row when adding values to wins
-                   // twoValuesInARow(array, j, i);  
-            });
-        });
-              console.log(winCountHuman) ;
-              console.log(winCountComputer) ;
-              console.log(currentBoard)
-    }
-
+    
     function computerPlay() {
         switch (moves.length) {
             case 0:
@@ -174,29 +218,23 @@ $(function () {
                 break;
             case 6:
                 fourthMove(moves[5]);
+                break;
             case 7:
                 fourthMove(moves[6]);
                 break;
             case 8:
                 fifthMove(moves[7])
+                break;
             case 9:
                 fifthMove(moves[8]);
         }
+        
         turn = 'human'
         console.log(moves);
         console.log(wins);
     }
 
-    function findWin(countIndex) {
-        if (winCountHuman[countIndex] === 3) {
-            modal('win');
-            resetGame();
-        } else if (winCountComputer[countIndex] === 3) {
-            modal('lose');
-            resetGame();
-        }
-    }
-    
+   
     // sequence of moves
 
     function firstMove(value) {
@@ -254,7 +292,7 @@ $(function () {
             addValueToWins();
             console.log(wins)
         } else {
-            console.log(wins) 
+            blockTwoInARow();
             addValueToWins();   
             console.log(wins);
             // if the computer didnt block the first two moves, run this
@@ -269,19 +307,53 @@ $(function () {
     
   
     function thirdMove(value) {
-        addValueToWins();
-
+            //if the human messed up and didn't block a computer win, this will make the win
+            computerWin();
+            // after the computer checks to see if it has two in a row, block the human if it has two in a row
+            blockTwoInARow();
+        //console.log(winCountComputer)
+            console.log(blocked)
+            console.log(turn)
+            console.log(currentBoard)
+        console.log(winCountHuman)
+        console.log(winCountComputer)
+        findWin();
+        let emptySpaces = currentBoard.filter(cell => cell === '');
+        console.log(emptySpaces)
+        if(emptySpaces.length === 4) {
+            cell = randomSpace(currentBoard.indexOf(''));
+            console.log(cell);
+            $('#' + cell).append(computerImage);
+            placeInCurrentBoard(cell, 'computer');
+            addValueToWins();
+        }
+        console.log('ummmmm')
     }
 
     function fourthMove(value) {
-        addValueToWins();
+        computerWin();
+        blockTwoInARow();
+        findWin();
+        let emptySpaces = currentBoard.filter(cell => cell === '');
+        if(emptySpaces.length === 2) {
+            cell = randomSpace(currentBoard.indexOf(''));
+            console.log(cell);
+            $('#' + cell).append(computerImage);
+            placeInCurrentBoard(cell, 'computer');
+            addValueToWins();
+        }
+        console.log(emptySpaces)
     }
 
     function fifthMove(value) {
-        addValueToWins();
+        computerWin();
+        blockTwoInARow();
+        findWin();
+        modal('tie')
     }
     
 
+            
     function modal(type) {
 
         // Get the modal
@@ -324,6 +396,8 @@ $(function () {
 
     function placeValuesOnScreen(event) {
         turn = 'human';
+        //reset the blocked variable after each block so the computer won't block if it has a win available and a block at the same time
+        blocked = false;
         let $target = $(event.target);
         // Make sure square doesn't already have an '<i>' or is an '<i>'.
         if ($target.has('i').length || $target.is('i')) {
@@ -337,9 +411,9 @@ $(function () {
         placeInCurrentBoard(ID, 'human');
         
         
-        // add the value to the wins arrays which will replace the id of the cell with the humans value
+        // add the value to the wins arrays which will replace the id of the cell with the humans value and run some tests before the computer places on the board
         addValueToWins()
-        
+        console.log(currentBoard)
         // its now the computers turn
         turn = 'computer';
         // run computerPlay function to check all scenarios and place its value on the board
