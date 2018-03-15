@@ -21,6 +21,7 @@ $(function () {
 
 
     // When the human clicks on button X or O, close the modal and store the values. If the human chooses O, the computer goes first.
+    // game object candidate
     function assignPlayers(event) {
         let $value = $(event.target).val();
         if ($value == 'X') {
@@ -115,7 +116,7 @@ $(function () {
     }
 
     function findTwoValuesInARow(array, countIndex, element) {
-        //if the human has two in a row, place a 'block' in the index of the array that needs to            be blocked
+        //if the human has two in a row, place a 'block' in the index of the array that needs to be blocked
         if (winCountHuman[countIndex] === 2 && !array.includes(computerValue)) {
             unoccupiedHumanSpace = array.filter(element => element !== humanValue && element !== computerValue).shift();
             array.splice(array.indexOf(unoccupiedHumanSpace), 1, computerValue);
@@ -162,28 +163,21 @@ $(function () {
                 firstMove(moves[0]);
                 break;
             case 2:
-                secondMove(moves[1]);
-                break;
             case 3:
-                secondMove(moves[2]);
+                secondMove(moves[moves.length - 1]);
                 break;
             case 4:
-                thirdMove(moves[3]);
-                break;
             case 5:
-                thirdMove(moves[4]);
+                thirdMove(moves[moves.length - 1]);
                 break;
             case 6:
-                fourthMove(moves[5]);
-                break;
             case 7:
-                fourthMove(moves[6]);
+                fourthMove(moves[moves.length - 1]);
                 break;
             case 8:
-                fifthMove(moves[7])
-                break;
             case 9:
-                fifthMove(moves[8]);
+                fifthMove(moves[moves.length - 1]);
+                break;
         }
         turn = 'human'
     }
@@ -199,39 +193,37 @@ $(function () {
             case 6:
             case 8:
                 cell = 4;
-                $('#' + cell).append(computerImage);
-                placeInCurrentBoard(cell, 'computer');
+                callPlaceInCurrentBoard(cell);
                 break;
                 // if opening move is in the center, place in a random corner. if computer goes first always place in a random corner.
             case 4:
                 cell = randomSpace(0, 2, 6, 8);
-                $('#' + cell).append(computerImage);
-                placeInCurrentBoard(cell, 'computer');
+                callPlaceInCurrentBoard(cell);
                 break;
                 // if opening move is on an edge, place randomly in one of 3 best possible positions
             case 1:
                 cell = randomSpace(0, 2, 4);
-                $('#' + cell).append(computerImage);
-                placeInCurrentBoard(cell, 'computer');
+                callPlaceInCurrentBoard(cell);
                 break;
             case 3:
                 cell = randomSpace(0, 4, 6);
-                $('#' + cell).append(computerImage);
-                placeInCurrentBoard(cell, 'computer');
+                callPlaceInCurrentBoard(cell);
                 break;
             case 5:
                 cell = randomSpace(2, 4, 8);
-                $('#' + cell).append(computerImage);
-                placeInCurrentBoard(cell, 'computer');
-
+                callPlaceInCurrentBoard(cell);
                 break;
             case 7:
-                cell = randomSpace(4, 6, 8)
-                $('#' + cell).append(computerImage);
-                placeInCurrentBoard(cell, 'computer');
+                cell = randomSpace(4, 6, 8);
+                callPlaceInCurrentBoard(cell);
                 break;
         }
         addValueToWins();
+    }
+    
+    function callPlaceInCurrentBoard(cell) {
+        $('#' + cell).append(computerImage);
+        placeInCurrentBoard(cell, 'computer');
     }
 
     function secondMove(value) {
@@ -332,12 +324,14 @@ $(function () {
         placeInCurrentBoard(ID, 'human');
 
         // add the value to the wins arrays which will replace the id of the cell with the humans value and run some tests before the computer places on the board
-        addValueToWins()
+        addValueToWins();
         // its now the computers turn
         turn = 'computer';
         // run computerPlay function to check all scenarios and place its value on the board
         computerPlay();
     }
+    
+    
 
     function startGame() {
         wins = [[0, 1, 2], [3, 4, 5], [6, 7, 8],
